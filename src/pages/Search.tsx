@@ -18,7 +18,8 @@ const Search = () => {
     const [bookOwner, setBookOwner] = useState<string>("Unknown Owner");
     const searchTimeout = useRef<NodeJS.Timeout | null>(null);
 
-    const { currentUser } = useCurrentUser();
+    const userJson = localStorage.getItem('user');
+    const currentUser = userJson ? JSON.parse(userJson) : null;
 
     const fetchBooks = async (page = 1, search = "", genre = "All") => {
         try {
@@ -44,12 +45,16 @@ const Search = () => {
 
     useEffect(() => {
         const getBookOwner = async () => {
-            if (activeBook?.owner_id && currentUser) {
+            if (activeBook?.owner_id) {
                 try {
-                    const loggedInUserId = Number(currentUser.user_id);
+                    const userJson = localStorage.getItem('user');
+                    const currentUser = userJson ? JSON.parse(userJson) : null;
+
+                    const loggedInUserId = Number(currentUser?.user_id);
                     const bookOwnerId = Number(activeBook.owner_id);
-                    console.log("Logged in: ", loggedInUserId);
-                    console.log("Owner: ", bookOwnerId);
+
+                    console.log("Logged in (localStorage):", loggedInUserId);
+                    console.log("Book Owner:", bookOwnerId);
 
                     if (loggedInUserId === bookOwnerId) {
                         setBookOwner("Me");

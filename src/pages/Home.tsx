@@ -48,20 +48,16 @@ const Home = () => {
                     </li>
                     <li>
                         <NavLink
-                            to="/shelf"
-                            className={({ isActive }) =>
-                                `hover-text-glow hover:text-xl ${isActive ? "glow-brown" : ""}`
-                            }
+                            to="shelf"
+                            className={`hover-text-glow hover:text-xl ${location.pathname === "/home/shelf" ? "glow-brown" : ""}`}
                         >
                             Shelf
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                            to="/drop-off"
-                            className={({ isActive }) =>
-                                `hover-text-glow hover:text-xl ${isActive ? "glow-brown" : ""}`
-                            }
+                            to="drop-off"
+                            className={`hover-text-glow hover:text-xl ${location.pathname === "/home/drop-off" ? "glow-brown" : ""}`}
                         >
                             Drop-off
                         </NavLink>
