@@ -1,17 +1,8 @@
-import { Outlet, NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { IoLogOutOutline } from "react-icons/io5";
 
 const Home = () => {
-    const [userId, setUserId] = useState<number | null>(null);
-
-    // useEffect(() => {
-    //     const fetchUser = async () => {
-    //         const user = await getCurrentUser();
-    //         if (user) setUserId(user.user_id);
-    //     };
-    //
-    //     fetchUser();
-    // }, []);
+    const navigate = useNavigate();
 
     return (
         <div className="min-h-screen w-screen">
@@ -33,28 +24,24 @@ const Home = () => {
                     </li>
                     <li>
                         <NavLink
-                            to="/home/search"
-                            className={`hover-text-glow hover:text-xl ${location.pathname.startsWith("/home/search") ? "glow-brown" : ""}`}
+                            to="search"
+                            className={`hover-text-glow hover:text-xl ${location.pathname === "/home/search" ? "glow-brown" : ""}`}
                         >
                             Search
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                            to={`/wishlist/${userId}`}
-                            className={({ isActive }) =>
-                                `hover-text-glow hover:text-xl ${isActive ? "glow-brown" : ""}`
-                            }
+                            to="/home"
+                            className={`hover-text-glow hover:text-xl ${location.pathname === "/home" ? "glow-brown" : ""}`}
                         >
                             Wishlist
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                            to="/donate"
-                            className={({ isActive }) =>
-                                `hover-text-glow hover:text-xl ${isActive ? "glow-brown" : ""}`
-                            }
+                            to="donate"
+                            className={`hover-text-glow hover:text-xl ${location.pathname === "/home/donate" ? "glow-brown" : ""}`}
                         >
                             Donate
                         </NavLink>
@@ -82,8 +69,17 @@ const Home = () => {
                 </ul>
 
                 <div className="w-1/3 justify-items-end">
-                    <img src="/logo.svg" alt="bookloop" className="h-14 w-14" />
+                    <div className="relative group">
+                        <IoLogOutOutline
+                            className="h-10 w-10 cursor-pointer"
+                            onClick={() => navigate("/")}
+                        />
+                        <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Log out
+                        </span>
+                    </div>
                 </div>
+
             </nav>
 
             {/* Main Content */}

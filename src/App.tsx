@@ -4,6 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home.tsx";
 import BookLoop from "./pages/bookLoop.tsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
+import Donate from "./pages/Donate.tsx";
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/home" element={<Home />}>
                     <Route index element={<BookLoop />} />
                     <Route path="search" element={<Search />} />
+                    <Route path="donate" element={<Donate />} />
                 </Route>
 
                 <Route path="/admin" element={<AdminDashboard />} />
