@@ -57,6 +57,11 @@ export const getBookById = (id: number) => api.get(`/books/${id}`);
 
 export const addBook = (data: any) => api.post('/books', data);
 
+export const getBooksByOwner = async (owner_id: number) => {
+    return await api.get(`/books/owned/${owner_id}`);
+};
+
+
 // =========================
 // Shelf APIs
 // =========================

@@ -35,7 +35,7 @@ const BookLoop = () => {
                               style={{ backgroundImage: "url('/cream-bg.png')"}}></span>
                         {/* beside the text */}
                         <span className="btn-fancy-line w-6 top-1/2 left-6 transform -translate-y-1/2 group-hover:bg-cream-0 bg-brown-0"></span>
-                        <a onClick={() => navigate('/search')} className="font-pd pl-8 uppercase text-lg transition-all duration-300 ease-in-out group-hover:glow-cream">
+                        <a onClick={() => navigate('/home/search')} className="font-pd pl-8 uppercase text-lg transition-all duration-300 ease-in-out group-hover:glow-cream">
                             Browse
                         </a>
                         {/* two below */}

@@ -18,7 +18,8 @@ const Search = () => {
     const [bookOwner, setBookOwner] = useState<string>("Unknown Owner");
     const searchTimeout = useRef<NodeJS.Timeout | null>(null);
 
-    const { currentUser } = useCurrentUser();
+    const userJson = localStorage.getItem('user');
+    const currentUser = userJson ? JSON.parse(userJson) : null;
 
     const fetchBooks = async (page = 1, search = "", genre = "All") => {
         try {
@@ -44,10 +45,16 @@ const Search = () => {
 
     useEffect(() => {
         const getBookOwner = async () => {
-            if (activeBook?.owner_id && currentUser) {
+            if (activeBook?.owner_id) {
                 try {
-                    const loggedInUserId = Number(currentUser.user_id);
+                    const userJson = localStorage.getItem('user');
+                    const currentUser = userJson ? JSON.parse(userJson) : null;
+
+                    const loggedInUserId = Number(currentUser?.user_id);
                     const bookOwnerId = Number(activeBook.owner_id);
+
+                    console.log("Logged in (localStorage):", loggedInUserId);
+                    console.log("Book Owner:", bookOwnerId);
 
                     if (loggedInUserId === bookOwnerId) {
                         setBookOwner("Me");
@@ -123,13 +130,13 @@ const Search = () => {
                         placeholder="Type a book title, or an author..."
                         value={searchTerm}
                         onChange={(e) => handleSearch(e.target.value)}
-                        className="w-1/3 p-3 border border-brown-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-0 bg-transparent text-brown-0 placeholder-brown-0 placeholder-opacity-50"
+                        className="w-full p-3 border border-brown-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-0 bg-transparent text-brown-0 placeholder-brown-0 placeholder-opacity-50"
                     />
 
                     <select
                         value={selectedGenre}
                         onChange={(e) => handleGenreChange(e.target.value)}
-                        className="p-3 border border-brown-0 rounded-lg bg-transparent text-brown-0 cursor-pointer"
+                        className="p-3 border border-brown-0 rounded-lg bg-transparent text-brown-0 cursor-pointer w-1/2"
                     >
                         {genres.map((genre) => (
                             <option key={genre} value={genre}>
