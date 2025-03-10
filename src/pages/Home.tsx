@@ -1,6 +1,11 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { IoLogOutOutline } from "react-icons/io5";
 
+const handleLogout = () => {
+    localStorage.removeItem("token");
+    alert("Logged out successfully!");
+  };
+
 const Home = () => {
     const navigate = useNavigate();
 
@@ -68,7 +73,10 @@ const Home = () => {
                     <div className="relative group">
                         <IoLogOutOutline
                             className="h-10 w-10 cursor-pointer"
-                            onClick={() => navigate("/")}
+                            onClick={() => {
+                                handleLogout();
+                                navigate("/");
+                            }}
                         />
                         <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity">
                             Log out
