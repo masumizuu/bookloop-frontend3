@@ -37,6 +37,7 @@ api.interceptors.response.use(
 export const registerUser = (data: any) => api.post('/auth/register', data);
 export const loginUser = (data: { email: string; password: string }) => api.post('/auth/login', data);
 export const fetchUserById = (id: number) => api.get(`/auth/${id}`);
+
 export const getCurrentUser = () => {
     const token = localStorage.getItem("token");
     return axios.get("/api/auth/current-user", {
