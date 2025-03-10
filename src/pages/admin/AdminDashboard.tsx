@@ -4,7 +4,7 @@ import { FaAddressBook } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { getAllBooks } from "../api/api";
+import { getBooks } from "../../api/api";
 
 const AdminDashboard: React.FC = () => {
     const [isHome, setIsHome] = useState(true); // default
@@ -28,7 +28,7 @@ const AdminDashboard: React.FC = () => {
         setIsBooks(true);
         setIsReq(false);
     }
-
+    
     const ReqToggle = () => {
         setIsHome(false);
         setIsBooks(false);
